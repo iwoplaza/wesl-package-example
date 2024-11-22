@@ -1,0 +1,17 @@
+lockfileVersion: '6.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .: {}
+
+  apps/example-app:
+    dependencies:
+      example-module:
+        specifier: workspace:0.0.0
+        version: link:../../packages/example-module
+
+  packages/example-module: {}
