@@ -1,5 +1,5 @@
 // @ts-check
 
-import { Gradient } from 'example-module/alpha';
+import { create_red_to_blue_gradient } from 'example-module/beta';
 
-Gradient.kind;
+console.log(create_red_to_blue_gradient);

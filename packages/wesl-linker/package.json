@@ -1,11 +1,11 @@
 {
-	"name": "example-module",
+	"name": "wesl-linker",
 	"type": "module",
 	"private": true,
 	"version": "0.0.0",
+	"main": "index.js",
 	"exports": {
-		"./alpha": { "import": "./js/alpha.js" },
-		"./beta": { "import": "./js/beta.js" }
+		".": { "import": "./index.js" }
 	},
 	"author": "Iwo Plaza",
 	"license": "MIT",
