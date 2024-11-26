@@ -89,15 +89,15 @@ export function link(options) {
         return '';
       }
 
-      let result = cachedResolves.get(value);
-      if (result !== undefined) {
-        return result;
+      let resolved = cachedResolves.get(value);
+      if (resolved !== undefined) {
+        return resolved;
       }
 
       if (fallthroughTypes.includes(typeof value)) {
-        result = String(value);
+        resolved = String(value);
       } else if (Array.isArray(value)) {
-        result = value.map((el) => ctx.resolve(el)).join('');
+        resolved = value.map((el) => ctx.resolve(el)).join('');
       } else if (isFunction(value)) {
         const identifier = ctx.uniqueName(value.label);
 
@@ -109,24 +109,24 @@ export function link(options) {
 
         ctx.append(`fn ${identifier}${body}\n\n`);
 
-        result = identifier;
+        resolved = identifier;
       } else if (isStruct(value)) {
         const identifier = ctx.uniqueName(value.label);
         const members = Object.entries(value.props)
           .map(([key, type]) => `  ${key}: ${ctx.resolve(type)},`)
           .join('\n');
         ctx.append(`struct ${identifier} {\n${members}\n}\n\n`);
-        result = identifier;
+        resolved = identifier;
       } else if ('type' in value) {
-        result = /** @type {string} */ (value.type);
+        resolved = /** @type {string} */ (value.type);
       } else {
         throw new Error(`Unknown resource type: ${JSON.stringify(value)}`);
       }
 
       if (typeof value === 'object') {
-        cachedResolves.set(value, result);
+        cachedResolves.set(value, resolved);
       }
-      return result;
+      return resolved;
     },
   };
 
