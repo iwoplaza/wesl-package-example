@@ -11,6 +11,7 @@
  * @prop {'fn'} type
  * @prop {TArgs} args
  * @prop {TReturns} returns
+ * @prop {string=} label
  */
 const fn =
   /**@type{<TArgs extends unknown[] | [],TReturns>(args:TArgs,returns:TReturns, body: unknown)=>WgslFn<TArgs, TReturns>}*/ (

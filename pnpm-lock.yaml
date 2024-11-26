@@ -13,5 +13,10 @@ importers:
       example-module:
         specifier: workspace:0.0.0
         version: link:../../packages/example-module
+      wesl-linker:
+        specifier: workspace:0.0.0
+        version: link:../../packages/wesl-linker
 
   packages/example-module: {}
+
+  packages/wesl-linker: {}

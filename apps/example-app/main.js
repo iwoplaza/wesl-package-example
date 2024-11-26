@@ -1,5 +1,8 @@
 // @ts-check
 
+import { link } from 'wesl-linker';
 import { create_red_to_blue_gradient } from 'example-module/beta';
 
-console.log(create_red_to_blue_gradient);
+const code = link({ input: [create_red_to_blue_gradient] });
+
+console.log(code);
