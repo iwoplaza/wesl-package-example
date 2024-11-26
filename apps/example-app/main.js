@@ -3,6 +3,7 @@
 import { link } from 'wesl-linker';
 import { create_red_to_blue_gradient } from 'example-module/beta';
 import { Gradient } from 'example-module/alpha';
+import { wrapBuffer } from './utils.js';
 
 const code = link({ input: [create_red_to_blue_gradient] });
 

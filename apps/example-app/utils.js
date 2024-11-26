@@ -11,7 +11,7 @@
  * @param {TData} schema
  * @returns {{ write(value: ValueOf<TData>): void }}
  */
-function wrapBuffer(buffer, schema) {
+export function wrapBuffer(buffer, schema) {
   return {
     /**
      * @param {ValueOf<TData>} value
