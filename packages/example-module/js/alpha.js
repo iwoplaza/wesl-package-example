@@ -2,6 +2,20 @@
 // @ts-check
 
 // ---
+// Type utils
+// ---
+
+/**
+ * @template T
+ * @typedef {T extends { __value: infer TValue } ? TValue : never} ValueOf
+ */
+
+/**
+ * @template T
+ * @typedef {T extends Record<string, unknown> ? { [Key in keyof T]: ValueOf<T[Key]> } : never} ValueOfRecord
+ */
+
+// ---
 // Value types
 // ---
 
@@ -41,6 +55,7 @@ const vec3f = /**@type{Vec3f}*/ ({
  * @prop {'struct'} type
  * @prop {T} props
  * @prop {string=} label
+ * @prop {ValueOfRecord<T>} __value
  */
 const struct = /**@type{<T>(label:string,props:T)=>WgslStruct<T>}*/ (
   (label, props) => ({

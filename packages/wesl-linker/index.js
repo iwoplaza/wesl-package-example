@@ -2,6 +2,16 @@
 
 /**
  * @template T
+ * @typedef {T extends { __value: infer TValue } ? TValue : never} ValueOf
+ */
+
+/**
+ * @template T
+ * @typedef {T extends Record<string, unknown> ? { [Key in keyof T]: ValueOf<T[Key]> } : never} ValueOfRecord
+ */
+
+/**
+ * @template T
  * @typedef {object} WgslStruct
  * @prop {'struct'} type
  * @prop {T} props
