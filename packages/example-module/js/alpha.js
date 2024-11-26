@@ -42,9 +42,10 @@ const vec3f = /**@type{Vec3f}*/ ({
  * @prop {T} props
  * @prop {string=} label
  */
-const struct = /**@type{<T>(props:T)=>WgslStruct<T>}*/ (
-  (props) => ({
+const struct = /**@type{<T>(label:string,props:T)=>WgslStruct<T>}*/ (
+  (label, props) => ({
     type: 'struct',
+    label,
     props,
   })
 );
@@ -62,9 +63,10 @@ const struct = /**@type{<T>(props:T)=>WgslStruct<T>}*/ (
  * @prop {string=} label
  */
 const fn =
-  /**@type{<TArgs extends unknown[] | [],TReturns>(args:TArgs,returns:TReturns,body:unknown)=>WgslFn<TArgs, TReturns>}*/ (
-    (args, returns, body) => ({
+  /**@type{<TArgs extends unknown[] | [],TReturns>(label:string,args:TArgs,returns:TReturns,body:unknown)=>WgslFn<TArgs, TReturns>}*/ (
+    (label, args, returns, body) => ({
       type: 'fn',
+      label,
       args,
       returns,
       body,
@@ -76,6 +78,7 @@ const fn =
 // ---
 
 export const half = fn(
+  'half',
   [f32],
   f32,
   `(value: f32) -> f32 {
@@ -84,6 +87,7 @@ export const half = fn(
 );
 
 export const double = fn(
+  'double',
   [f32],
   f32,
   `(value: f32) -> f32 {
@@ -92,6 +96,7 @@ export const double = fn(
 );
 
 export const add = fn(
+  'add',
   [f32, f32],
   f32,
   `(a: f32, b: f32) -> f32 {
@@ -99,7 +104,7 @@ export const add = fn(
 }`
 );
 
-export const Gradient = struct({
+export const Gradient = struct('Gradient', {
   from: vec3f,
   to: vec3f,
 });

@@ -90,7 +90,11 @@ export function link(options) {
         result = value.map((el) => ctx.resolve(el)).join('');
       } else if (isFunction(value)) {
         const identifier = ctx.uniqueName(value.label);
-        ctx.resolve(value.returns); // including the definition of the 'returns' type
+
+        for (const arg of value.args) {
+          ctx.resolve(arg); // including the definitions of each arg type
+        }
+        ctx.resolve(value.returns); // including the definition of the return type
         const body = ctx.resolve(value.body);
 
         ctx.append(`fn ${identifier}${body}\n\n`);

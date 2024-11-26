@@ -14,9 +14,10 @@
  * @prop {string=} label
  */
 const fn =
-  /**@type{<TArgs extends unknown[] | [],TReturns>(args:TArgs,returns:TReturns, body: unknown)=>WgslFn<TArgs, TReturns>}*/ (
-    (args, returns, body) => ({
+  /**@type{<TArgs extends unknown[] | [],TReturns>(label:string,args:TArgs,returns:TReturns, body: unknown)=>WgslFn<TArgs, TReturns>}*/ (
+    (label, args, returns, body) => ({
       type: 'fn',
+      label,
       args,
       returns,
       body,
@@ -29,17 +30,22 @@ const fn =
 
 import { double, Gradient } from './alpha.js';
 
-export const create_red_to_blue_gradient = fn([], Gradient, [
-  '() -> ',
+export const create_red_to_blue_gradient = fn(
+  'create_red_to_blue_gradient',
+  [],
   Gradient,
-  ` {
+  [
+    '() -> ',
+    Gradient,
+    ` {
   var result: `,
-  Gradient,
-  `;
+    Gradient,
+    `;
   result.from = vec3f(1., 0., 0.);
   result.to = vec3f(0., 0., `,
-  double,
-  `(0.5));
+    double,
+    `(0.5));
   return result;
 }`,
-]);
+  ]
+);
