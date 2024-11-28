@@ -1,3 +1,23 @@
+/* [lee] nifty! 
+  I think the ability to control shader assembly from TypeScript is powerful. 
+
+  Beyond this simple example, I can imagine the flexibilty of TypeScript control
+  will be valuable to advanced users who want to plug in different functions
+  or modules under control of TypeScript so they control linking at runtime
+  e.g. to plugin in different features in response to user settings, 
+  or platform feature detection.
+
+  We imagine some such control from WESL, via conditions and generics, both
+  of which can be controlled at runtime.
+
+  But we want to be able to control linking from TypeScript too, sometimes
+  a declarative WESL approach isn't enough. @link is one design sketch in that direction.
+
+  My hope is that we can find ways so that the TypeScript controls and the WGSL linking
+  controls are convergent. e.g. conditions and generics and perhaps some variant of @link
+  that can be set both from TypeScript and WESL.
+*/
+
 // @ts-check
 
 /**
