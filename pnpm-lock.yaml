@@ -33,14 +33,14 @@ importers:
   packages/example-module/js:
     dependencies:
       wgsl-as-js:
-        specifier: iwoplaza/wgsl-as-js#ac6642813fa5fa3832e6f2a3d874b0738e5606df
-        version: github.com/iwoplaza/wgsl-as-js/ac6642813fa5fa3832e6f2a3d874b0738e5606df
+        specifier: iwoplaza/wgsl-as-js#67c877ace63380460ab8895acf7940c7a9a5512c
+        version: github.com/iwoplaza/wgsl-as-js/67c877ace63380460ab8895acf7940c7a9a5512c
 
   packages/wesl-linker:
     dependencies:
       wgsl-as-js:
-        specifier: iwoplaza/wgsl-as-js#ac6642813fa5fa3832e6f2a3d874b0738e5606df
-        version: github.com/iwoplaza/wgsl-as-js/ac6642813fa5fa3832e6f2a3d874b0738e5606df
+        specifier: iwoplaza/wgsl-as-js#67c877ace63380460ab8895acf7940c7a9a5512c
+        version: github.com/iwoplaza/wgsl-as-js/67c877ace63380460ab8895acf7940c7a9a5512c
 
 packages:
 
@@ -67,8 +67,8 @@ packages:
       typed-binary: 4.2.0
     dev: false
 
-  github.com/iwoplaza/wgsl-as-js/ac6642813fa5fa3832e6f2a3d874b0738e5606df:
-    resolution: {tarball: https://codeload.github.com/iwoplaza/wgsl-as-js/tar.gz/ac6642813fa5fa3832e6f2a3d874b0738e5606df}
+  github.com/iwoplaza/wgsl-as-js/67c877ace63380460ab8895acf7940c7a9a5512c:
+    resolution: {tarball: https://codeload.github.com/iwoplaza/wgsl-as-js/tar.gz/67c877ace63380460ab8895acf7940c7a9a5512c}
     name: wgsl-as-js
-    version: 0.0.3
+    version: 0.0.4
     dev: false

@@ -46,3 +46,29 @@ A simple Node.js app that shows how the linker can be used, and how to create ut
 ### apps/typegpu-app
 
 Sample code showcasing that exotic data types (those originating outside of TypeGPU) can be used by TypeGPU APIs, and properly infer type information from them.
+
+## Addressing possible limitations
+
+In case of an error or limitation that cannot be fixed by updating `wgsl-as-js`, an additional package can be installed that performs the parsing and creates `wgsl-as-js` values at runtime.
+
+Example of linking a valid/up-to-date library:
+
+```ts
+import { link } from 'wesl-linker';
+import { entryPoint } from 'example-module';
+
+const rawWGSL = link({ input: entryPoint });
+```
+
+Example of falling back to JIT parsing in case something is wrong with the packaged library.
+
+```ts
+import { link } from 'wesl-linker';
+import { WESLJitParser } from 'wesl-jit';
+// Importing the metadata, instead of reified references...
+// Still retains references to other WESL files,
+// so is able to handle transitive dependencies.
+import moduleMeta from 'example-module';
+
+const rawWGSL = link({ input: moduleMeta, jit: new WESLJitParser() });
+```

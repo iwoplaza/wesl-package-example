@@ -3,42 +3,75 @@
 
 import { fn, f32, struct, vec3f } from 'wgsl-as-js';
 
-// ---
-// Function types
-// ---
+const META = {
+  filename: 'alpha.wesl',
+  text: `\
+// The source of truth used to generate host-specific packaged formats (/js, /rust, ...).
+
+export fn half(value: f32) -> f32 {
+  return value * 0.5;
+}
+
+export fn double(value: f32) -> f32 {
+  return value * 2.;
+}
+
+export fn add(a: f32, b: f32) -> f32 {
+  return a + b;
+}
+
+export struct Gradient {
+  from: vec3f,
+  to: vec3f,
+}
+`,
+  references: [],
+};
+
+export default META;
 
 // ---
 // Definitions
 // ---
 
-export const half = fn(
-  'half',
-  [f32],
-  f32,
-  `(value: f32) -> f32 {
+export const half = fn({
+  src: { doc: META, start: 91, end: 150 },
+  label: 'half',
+  argTypes: [f32],
+  returnType: f32,
+  body: `\
+(value: f32) -> f32 {
   return value * 0.5;
-}`
-);
+}`,
+});
 
-export const double = fn(
-  'double',
-  [f32],
-  f32,
-  `(value: f32) -> f32 {
+export const double = fn({
+  src: { doc: META, start: 152, end: 212 },
+  label: 'double',
+  argTypes: [f32],
+  returnType: f32,
+  body: `\
+(value: f32) -> f32 {
   return value * 2.;
-}`
-);
+}`,
+});
 
-export const add = fn(
-  'add',
-  [f32, f32],
-  f32,
-  `(a: f32, b: f32) -> f32 {
+export const add = fn({
+  src: { doc: META, start: 214, end: 270 },
+  label: 'add',
+  argTypes: [f32, f32],
+  returnType: f32,
+  body: `\
+(a: f32, b: f32) -> f32 {
   return a + b;
-}`
-);
+}`,
+});
 
-export const Gradient = struct('Gradient', {
-  from: vec3f,
-  to: vec3f,
+export const Gradient = struct({
+  src: { doc: META, start: 272, end: 326 },
+  label: 'Gradient',
+  propTypes: {
+    from: vec3f,
+    to: vec3f,
+  },
 });
