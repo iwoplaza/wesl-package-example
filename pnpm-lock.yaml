@@ -16,17 +16,59 @@ importers:
     dependencies:
       example-module:
         specifier: workspace:0.0.0
-        version: link:../../packages/example-module
+        version: link:../../packages/example-module/js
       wesl-linker:
         specifier: workspace:0.0.0
         version: link:../../packages/wesl-linker
 
-  packages/example-module: {}
+  apps/typegpu-app:
+    dependencies:
+      example-module:
+        specifier: workspace:0.0.0
+        version: link:../../packages/example-module/js
+      typegpu:
+        specifier: https://pkg.csb.dev/software-mansion/TypeGPU/commit/e978f557/typegpu
+        version: '@pkg.csb.dev/software-mansion/TypeGPU/commit/e978f557/typegpu'
 
-  packages/wesl-linker: {}
+  packages/example-module/js:
+    dependencies:
+      wgsl-as-js:
+        specifier: iwoplaza/wgsl-as-js#ac6642813fa5fa3832e6f2a3d874b0738e5606df
+        version: github.com/iwoplaza/wgsl-as-js/ac6642813fa5fa3832e6f2a3d874b0738e5606df
+
+  packages/wesl-linker:
+    dependencies:
+      wgsl-as-js:
+        specifier: iwoplaza/wgsl-as-js#ac6642813fa5fa3832e6f2a3d874b0738e5606df
+        version: github.com/iwoplaza/wgsl-as-js/ac6642813fa5fa3832e6f2a3d874b0738e5606df
 
 packages:
 
   /@webgpu/types@0.1.51:
     resolution: {integrity: sha512-ktR3u64NPjwIViNCck+z9QeyN0iPkQCUOQ07ZCV1RzlkfP+olLTeEZ95O1QHS+v4w9vJeY9xj/uJuSphsHy5rQ==}
     dev: true
+
+  /tinyest@0.0.0:
+    resolution: {integrity: sha512-rCvaLewct/tm5CVLMdoa6xKNHWxT60AwhrmF7mjtkhj8w8VCeAg44NB2bzohEfN1SzfPCSyuB8GMmC/BV2gyjw==}
+    engines: {node: '>=12.20.0'}
+    dev: false
+
+  /typed-binary@4.2.0:
+    resolution: {integrity: sha512-K8lXyQUAk095YkIkFqV929+epoQqxB0lsx9TBd1mb79565eVWXIRa7emCArRajH+g5nYa3t/ZoaSQIl0RDQMsQ==}
+    dev: false
+
+  '@pkg.csb.dev/software-mansion/TypeGPU/commit/e978f557/typegpu':
+    resolution: {tarball: https://pkg.csb.dev/software-mansion/TypeGPU/commit/e978f557/typegpu}
+    name: typegpu
+    version: 0.3.0-alpha.1
+    engines: {node: '>=12.20.0'}
+    dependencies:
+      tinyest: 0.0.0
+      typed-binary: 4.2.0
+    dev: false
+
+  github.com/iwoplaza/wgsl-as-js/ac6642813fa5fa3832e6f2a3d874b0738e5606df:
+    resolution: {tarball: https://codeload.github.com/iwoplaza/wgsl-as-js/tar.gz/ac6642813fa5fa3832e6f2a3d874b0738e5606df}
+    name: wgsl-as-js
+    version: 0.0.3
+    dev: false

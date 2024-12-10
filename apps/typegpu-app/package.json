@@ -1,15 +1,15 @@
 {
-	"name": "example-app",
+	"name": "typegpu-app",
 	"type": "module",
 	"version": "0.0.0",
 	"scripts": {
 		"start": "node main.js"
 	},
+	"keywords": [],
 	"author": "Iwo Plaza",
 	"license": "MIT",
-	"packageManager": "pnpm@8.15.8+sha256.691fe176eea9a8a80df20e4976f3dfb44a04841ceb885638fe2a26174f81e65e",
 	"dependencies": {
 		"example-module": "workspace:0.0.0",
-		"wesl-linker": "workspace:0.0.0"
+		"typegpu": "https://pkg.csb.dev/software-mansion/TypeGPU/commit/e978f557/typegpu"
 	}
 }

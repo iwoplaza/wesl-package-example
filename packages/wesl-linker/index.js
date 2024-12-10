@@ -1,31 +1,10 @@
 // @ts-check
 
-/**
- * @template T
- * @typedef {T extends { __value: infer TValue } ? TValue : never} ValueOf
- */
+import { isWgslStruct, isWgslFn } from 'wgsl-as-js';
 
 /**
  * @template T
- * @typedef {T extends Record<string, unknown> ? { [Key in keyof T]: ValueOf<T[Key]> } : never} ValueOfRecord
- */
-
-/**
- * @template T
- * @typedef {object} WgslStruct
- * @prop {'struct'} type
- * @prop {T} props
- * @prop {string=} label An explicit name given to this struct
- */
-
-/**
- * @template TArgs,TReturns
- * @typedef {object} WgslFn
- * @prop {'fn'} type
- * @prop {TArgs} args
- * @prop {TReturns} returns
- * @prop {string=} label An explicit name given to this function
- * @prop {unknown} body
+ * @typedef {import('wgsl-as-js').Infer<T>} Infer
  */
 
 /**
@@ -44,22 +23,6 @@
  * @prop {(val: *) => string} resolve
  * @prop {(primer: string|undefined) => string} uniqueName
  */
-
-/**
- * @param {*} value
- * @return {value is WgslFn<*, *>}
- */
-function isFunction(value) {
-  return value?.type === 'fn';
-}
-
-/**
- * @param {*} value
- * @return {value is WgslStruct<*>}
- */
-function isStruct(value) {
-  return value?.type === 'struct';
-}
 
 const fallthroughTypes = ['string', 'number', 'boolean'];
 
@@ -98,21 +61,21 @@ export function link(options) {
         resolved = String(value);
       } else if (Array.isArray(value)) {
         resolved = value.map((el) => ctx.resolve(el)).join('');
-      } else if (isFunction(value)) {
+      } else if (isWgslFn(value)) {
         const identifier = ctx.uniqueName(value.label);
 
-        for (const arg of value.args) {
+        for (const arg of value.argTypes) {
           ctx.resolve(arg); // including the definitions of each arg type
         }
-        ctx.resolve(value.returns); // including the definition of the return type
+        ctx.resolve(value.returnType); // including the definition of the return type
         const body = ctx.resolve(value.body);
 
         ctx.append(`fn ${identifier}${body}\n\n`);
 
         resolved = identifier;
-      } else if (isStruct(value)) {
+      } else if (isWgslStruct(value)) {
         const identifier = ctx.uniqueName(value.label);
-        const members = Object.entries(value.props)
+        const members = Object.entries(value.propTypes)
           .map(([key, type]) => `  ${key}: ${ctx.resolve(type)},`)
           .join('\n');
         ctx.append(`struct ${identifier} {\n${members}\n}\n\n`);
